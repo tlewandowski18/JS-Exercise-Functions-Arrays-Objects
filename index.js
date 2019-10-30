@@ -157,7 +157,9 @@ function getCarInfoById(carArr, carId) {
 */
 function sortCarInventory(carArr) {
   carArr.sort((x, y) => {
-    return x.car_model < y.car_model;
+    const textA = x.car_model.toUpperCase();
+    const textB = y.car_model.toUpperCase();
+    return (textA < textB) ? -1 : (textB < textA) ? 1 : 0;
   })
 
   return carArr;

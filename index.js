@@ -59,10 +59,14 @@ function makePersonObject(id, name, email) {
  * passing { id: 1, name: 'Leia', email: 'leia@leia.com` } as the argument,
  * the returned value should look like `Hello, my name is Leia`.
 */
+
+
+
 function getName(obj) {
   /* code here */
-  return `Hello, my name is ${obj.name}`;
+  return "Hello, my name is " + obj.name;
 }
+
 
 /**
  * ### Challenge `makeSmartPerson`
@@ -77,20 +81,25 @@ function getName(obj) {
  *         and returns a string like `Hello, my name is {name}`.
  *         where `{name}` is the name passed into `makeSmartPerson`.
 */
+
+
 function makeSmartPerson(name) {
   /* code here */
-  return {
-    'name': name,
+  const obj = {
+    name: name,
 
-    sum(num1, num2) {
+    sum: function(num1, num2){
       return num1 + num2;
     },
 
-    speak() {
-      return `Hello, my name is ${name}`
-    },
-  }
+    speak: function(){
+      return "Hello, my name is " + name;
+    }
+
+  };
+  return obj;
 }
+
 
 /**
  * ### Challenge `getCarInfoByIndex`
@@ -121,10 +130,10 @@ function getCarInfoByIndex(carArr, index) {
  * For example, if getLastCarInfo is invoked passing the inventory inside /data/inventory.js,
  * it will return `This is a Lincoln Town Car`.
 */
-function getLastCarInfo(carArr) {
+function getLastCarInfo(arr) {
   /* code here */
-  const obj = carArr[carArr.length - 1];
-  return `This is a ${obj.car_make} ${obj.car_model}`
+  const obj = arr[arr.length - 1];
+  return "This is a " + obj.car_make + obj.car_model;
 }
 
 /**
@@ -141,7 +150,11 @@ function getLastCarInfo(carArr) {
 */
 function getCarInfoById(carArr, carId) {
   /* code here */
-  const idArr = carArr.map(car => car.id);
+  const idArr = [];
+  for (i=0; i < carArr.length; i++) {
+    const id = carArr[i].id;
+    idArr.push(id)
+  }
   const objIndex = idArr.indexOf(carId);
   const obj = carArr[objIndex];
   return `This is a ${obj.car_make} ${obj.car_model}`;
@@ -176,8 +189,12 @@ function sortCarInventory(carArr) {
 */
 function getModelYears(carArr) {
   /* code here */
-
-  return carArr.map(car => car.car_year);
+  const carYearArr = [];
+  for (let i = 0; i < carArr.length; i++){
+    const carYear = carArr[i].car_year;
+    carYearArr.push(carYear)
+  }
+  return carYearArr;
 }
 
 /**
@@ -194,7 +211,14 @@ function getModelYears(carArr) {
 */
 function getOlderCars(carArr, maxYear) {
   /* code here */
-  return carArr.filter(car => car.car_year <= maxYear);
+  const oldCars = [];
+  for (let i = 0; i < carArr.length; i++) {
+    const year = carArr[i].car_year;
+    if (year <= maxYear){
+      oldCars.push(carArr[i])
+    }
+  }
+  return oldCars;
 }
 
 /**
@@ -210,7 +234,15 @@ function getOlderCars(carArr, maxYear) {
 */
 function getGermanCars(carArr) {
   /* code here */
-  return carArr.filter(car => car.car_make === 'Audi' || car.car_make === 'Mercedes-Benz' || car.car_make === 'Volkswagen' || car.car_make === 'BMW')
+  const germanCars = [];
+  for (let i = 0; i < carArr.length; i++) {
+    const make = carArr[i].car_make;
+    if (make === 'Audi' || make === 'Mercedes-Benz' || make === 'Volkswagen' || make === 'BMW'){
+      germanCars.push(carArr[i])
+    }
+  }
+
+  return germanCars;
 }
 
 /**
@@ -275,3 +307,7 @@ if (typeof exports !== 'undefined') {
   if (addFive) { module.exports.addFive = addFive }
   if (argTimesTwo) { module.exports.argTimesTwo = argTimesTwo }
 }
+
+
+
+
